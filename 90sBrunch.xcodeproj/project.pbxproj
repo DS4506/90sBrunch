@@ -30,6 +30,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		4779E9022E160E52004291DD /* practice */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = practice;
+			sourceTree = "<group>";
+		};
 		4788D9E32E1379190022078A /* 90sBrunch */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = 90sBrunch;
@@ -79,6 +84,7 @@
 				4788D9F12E13791A0022078A /* 90sBrunchTests */,
 				4788D9FB2E13791A0022078A /* 90sBrunchUITests */,
 				4788D9E22E1379190022078A /* Products */,
+				4779E9022E160E52004291DD /* practice */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +114,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				4779E9022E160E52004291DD /* practice */,
 				4788D9E32E1379190022078A /* 90sBrunch */,
 			);
 			name = 90sBrunch;
