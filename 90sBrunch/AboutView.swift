@@ -25,6 +25,8 @@ struct AboutView: View {
             Button("Place Order"){
                 orders += 1
             }
+            Divider()
+            Spacer()
             Button("reset"){
                 orders = 0
         }

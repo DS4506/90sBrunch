@@ -10,46 +10,58 @@ import SwiftUI
 struct ReservationForm: View {
     @State private var userName: String = ""
     @State private var guestCount: Int = 0
-    @State private var showConfirmation: Bool = false
+    @State private var showSummary: Bool = false
+    @State private var reservationDate = Date()
+    @State private var allergyNotes = ""
 
     var body: some View {
-        NavigationView {
+        NavigationStack{
+            Image("littleLemonLogo")
             Form {
                 Section(header: Text("Reservation Details")) {
                     TextField("Enter your name", text: $userName)
-                        .textFieldStyle(.roundedBorder)
-
-                    if userName.isEmpty {
-                        Text("Please enter your name")
+                    if !Validations.isValidName(userName){
+                        Text("Please insert your name")
                             .foregroundColor(.red)
                             .font(.caption)
                     }
-
-                    Stepper("Guests: \(guestCount)", value: $guestCount, in: 0...10)
-
-                    if guestCount > 5 {
-                        Text("For large parties, we will contact you")
-                            .foregroundColor(.orange)
-                            .font(.caption)
-                    }
+                    
                 }
-
-                Section {
-                    Button("Confirm Reservation") {
-                        showConfirmation = true
-                    }
-                    .disabled(userName.isEmpty)
+                
+                Stepper("Guests: \(guestCount)", value: $guestCount, in: 0...10)
+                
+                if guestCount > 5 {
+                    Text("For large parties, we will contact you")
+                        .foregroundColor(.blue)
+                        .font(.caption)
                 }
-            }
-            .navigationTitle("Book a table")
-            .alert(isPresented: $showConfirmation) {
-                Alert(title: Text("Reservation Confirmed"),
-                      message: Text("Thank you, \(userName)!"),
-                      dismissButton: .default(Text("OK")))
+                DatePicker("Date", selection: $reservationDate, displayedComponents: [.date, .hourAndMinute])
+                
+                TextField("Any allergies?", text: $allergyNotes)
+                
+                Button("Confirm Reservation"){
+                    if !userName.isEmpty {
+                        showSummary = true
+                    }
+                    
+                }
+                .disabled(userName.isEmpty)
+                .navigationDestination(isPresented: $showSummary){
+                    ReservationSummaryView(
+                        name: userName,
+                        date: reservationDate,
+                        guests: guestCount,
+                        allergy: allergyNotes
+                        
+                    )
             }
         }
+       
+        }
+        
+        }
     }
-}
+
 
 #Preview {
     ReservationForm()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Mainview: View {
+struct MainView: View {
     @State private var isLoggedIn = false
     @State private var userName = ""
     
