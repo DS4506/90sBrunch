@@ -10,15 +10,23 @@ import SwiftUI
 struct ReservationSummaryView: View {
     let name: String
     let date: Date
-    let guests: Int
+    let guestCount: Int
     let allergy: String
+    
     var body: some View {
         VStack (alignment: .leading) {
-            Text("Reservation Summary")
-                .font(.title)
+            Text("Thank you \(name),your rservations is confirmed for\(guestCount) people.")
+                .font(.headline)
+                .multilineTextAlignment(.center)
+            
+            if !allergy.isEmpty {
+                Text("Note: We will accommodate the following allergies: \(allergy)")
+                    .foregroundColor(.red)
+                    .multilineTextAlignment(.center)
+            }
             Text("Name: \(name)")
             Text("Date: \(date, style: .date)")
-            Text("Guests: \(guests)")
+            Text("GuestCount: \(guestCount)")
             Text("Allergies: \(allergy)")
         }
     }
