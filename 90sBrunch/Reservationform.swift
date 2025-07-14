@@ -13,7 +13,7 @@ struct ReservationForm: View {
     @State private var showSummary: Bool = false
     @State private var reservationDate = Date()
     @State private var allergyNotes = ""
-    @State private var showDateError=false
+    @State private var showDateError = false
 
     var body: some View {
         NavigationStack{
@@ -27,7 +27,7 @@ struct ReservationForm: View {
                             .font(.caption)
                     }
                     
-                }
+                
                 
                 Stepper("Guests: \(guestCount)", value: $guestCount, in: 0...20)
                 
@@ -35,10 +35,7 @@ struct ReservationForm: View {
                     Text("For large parties, we will contact you")
                         .foregroundColor(.blue)
                         .font(.caption)
-                }else if guestCount>=5{
-                    Text("For large parties, please arrive 10 minutes early")
-                        .foregroundColor(.red)
-                        .font(.caption)
+                
                 }
                 DatePicker("Date", selection: $reservationDate, displayedComponents: [.date, .hourAndMinute])
                 

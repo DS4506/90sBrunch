@@ -1,11 +1,11 @@
 import UIKit
 
-func great(person String) ->String
-    let greating = "Hello, \(person)!"
-    return greating
+func greet(person:String)->String{
+    let greeting = "Hello, \(person)!"
+    return greeting
 }
 // call the function
-let message = great(person: "tasha")
+let message = greet(person: "tasha")
 print(message)
 
 func great2(person: String, formally: Bool = false)->String{
@@ -19,12 +19,12 @@ func great2(person: String, formally: Bool = false)->String{
 print(great2(person: "someone"))
 print(great2(person: "Dr. Doom", formally: true))
 
-func calculateArea(width: Double, quantity: Int)->Double{
+func calculateTotal(price: Double, quantity: Int)->Double{
     return price * Double(quantity)
     
 }
 
-let total = calculateArea(price: 99.9, quantity: 2)
+let total = calculateTotal(price: 99.9, quantity: 2)
 print(total)
 
 func deliveryTime(minutes:Int) -> String{
