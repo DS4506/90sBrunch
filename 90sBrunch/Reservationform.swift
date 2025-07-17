@@ -14,7 +14,7 @@ struct ReservationForm: View {
     @State private var reservationDate = Date()
     @State private var allergyNotes = ""
     @State private var showDateError = false
-
+    
     var body: some View {
         NavigationStack{
             Image("littleLemonLogo")
@@ -27,51 +27,51 @@ struct ReservationForm: View {
                             .font(.caption)
                     }
                     
-                
-                
-                Stepper("Guests: \(guestCount)", value: $guestCount, in: 0...20)
-                
-                if guestCount > 8 {
-                    Text("For large parties, we will contact you")
-                        .foregroundColor(.blue)
-                        .font(.caption)
-                
-                }
-                DatePicker("Date", selection: $reservationDate, displayedComponents: [.date, .hourAndMinute])
-                
-                TextField("Any allergies?", text: $allergyNotes)
-                
-                Button("Confirm Reservation"){
-                    if reservationDate > Date(){
-                        showDateError=true
-                    }else{
-                        showDateError=false
-                        showSummary=true
-                    }
                     
-                }
-                .disabled(userName.isEmpty)
-                .navigationDestination(isPresented: $showSummary){
-                    ReservationSummaryView(
-                        name: userName,
-                        date: reservationDate,
-                        guests: guestCount,
-                        allergy: allergyNotes
+                    
+                    Stepper("Guests: \(guestCount)", value: $guestCount, in: 0...20)
+                    
+                    if guestCount > 8 {
+                        Text("For large parties, we will contact you")
+                            .foregroundColor(.blue)
+                            .font(.caption)
                         
-                    )
+                    }
+                    DatePicker("Date", selection: $reservationDate, displayedComponents: [.date, .hourAndMinute])
+                    
+                    TextField("Any allergies?", text: $allergyNotes)
+                    
+                    Button("Confirm Reservation"){
+                        if reservationDate > Date(){
+                            showDateError=true
+                        }else{
+                            showDateError=false
+                            showSummary=true
+                        }
+                        
+                    }
+                    .disabled(userName.isEmpty)
+                    .navigationDestination(isPresented: $showSummary){
+                        ReservationSummaryView(
+                            name: userName,
+                            date: reservationDate,
+                            guestCount: guestCount,
+                            allergy: allergyNotes
+                            
+                        )
+                    }
+                    .navigationTitle("Book a table")
                 }
-                .navigationTitle("Book a table")
+                
             }
-       
-        }
-        
+            
         }
     }
-
-
-#Preview {
-    ReservationForm()
 }
+
+//#Preview {
+//    ReservationForm()
+//}
 
 
 

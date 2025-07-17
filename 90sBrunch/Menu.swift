@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct MenuView: View {
-@State private var showMessage = false
+    @State private var showMessage = false
+    @State private var showPremiumOnly: Bool = false
+    @State private var showDeserts: Bool = false
     // Use the struct
     
     let menuItems = [
@@ -24,6 +26,16 @@ struct MenuView: View {
     var sortedMenuItems:[MenuItem] {
         menuItems.sorted { $0.name < $1.name }
     }
+    
+    var filteredMenu: [MenuItem] {
+        showPremiumOnly ? menuItems.filter { $0.price < 10 } : menuItems
+    }
+    
+    var averagePrice: Double {
+        let total = filteredMenu.map{$0.price}.reduce(0, +)
+        return total / Double(filteredMenu.count)
+        
+    }
         
             var body: some View {
         VStack{
@@ -37,6 +49,10 @@ struct MenuView: View {
         }
             .padding()
             
+            Text("Average price: $\(averagePrice, specifier: "%.2f")")
+                .font(.footnote)
+                
+            
                 VStack(spacing: 20){
                                 Toggle("Show an special text",isOn: $showMessage)
                                     .padding()
@@ -48,9 +64,15 @@ struct MenuView: View {
                                 }
                             }
                            
-                           
-                            List(sortedMenuItems){ item in
-                                MenuItemView(item:item)
+                           Button("View Deserts"){
+                               showDeserts.toggle()
+                           }
+                            .padding()
+                            .background(.green.opacity(0.4))
+                            .cornerRadius(12)
+            
+                            .sheet(isPresented: $showDeserts){
+                                Desertview()
                             }
                            
                            
